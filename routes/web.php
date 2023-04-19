@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfManager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 /*
@@ -12,15 +13,11 @@ use App\Http\Controllers\AuthManager;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
-Route::get('/registration', [AuthManager::class, 'registration'])->name('registration');
-Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('registration.post');
 Route::get('/logout',[AuthManager::class, 'logout'])->name('logout');
+Route::get('/',[ConfManager::class, 'conferences'])->name('conferences');
 Route::group(['middleware' =>'auth'], function(){
-//surasyti cia routus kuriuos noresiu pasiekti authorizacvijos metu
+    Route::get('/create',[ConfManager::class, 'createConferences'])->name('createConferences');
+    Route::post('/create',[ConfManager::class, 'postConferences'])->name('conferences.post');
 });
