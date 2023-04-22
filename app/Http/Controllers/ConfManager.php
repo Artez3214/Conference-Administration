@@ -12,16 +12,13 @@ use Illuminate\Support\Facades\Session;
 
 class ConfManager extends Controller
 {
-    function conferences()
-    {
-        return view('conferences');
-    }
 
-    function createConferences()
+    public function createConferences()
     {
         return view('create');
     }
-    function postConferences(Request $request)
+
+    public function postConferences(Request $request)
     {
         $request->validate([
             'header'      => 'required',
@@ -41,5 +38,16 @@ class ConfManager extends Controller
 
         return redirect(route('conferences'))->with("success", "Registration success");
 
+
     }
+
+    public function index()
+    {
+        $conferences = Conferences::latest()->paginate(5);
+        return view('index', compact('conferences'))->with(request()->input('page'));
+    }
+
 }
+
+
+

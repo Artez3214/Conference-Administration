@@ -16,7 +16,7 @@ use App\Http\Controllers\AuthManager;
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
 Route::get('/logout',[AuthManager::class, 'logout'])->name('logout');
-Route::get('/',[ConfManager::class, 'conferences'])->name('conferences');
+Route::get('/',[ConfManager::class, 'index'])->name('conferences');
 Route::group(['middleware' =>'auth'], function(){
     Route::get('/create',[ConfManager::class, 'createConferences'])->name('createConferences');
     Route::post('/create',[ConfManager::class, 'postConferences'])->name('conferences.post');
