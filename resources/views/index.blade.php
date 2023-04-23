@@ -8,7 +8,7 @@
             </div>
             @auth
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('conferences.post') }}"> Create New Conference</a>
+                <a class="btn btn-success" href="{{ route('createConferences') }}"> Create New Conference</a>
             </div>
             @endauth
         </div>
@@ -36,6 +36,10 @@
                 <td>{{ $conference->date }}</td>
                 <td>{{ $conference->address }}</td>
                 <td>
+                    <form action="{{route('conferences.destroy',$conference->id)}}">
+                        <a class="btn btn-info" href="{{route('conferences.show', $conference->id)}}">Show</a>
+                        <a class="btn btn-primary" href="{{ route('conferences.edit',$conference->id) }}">Edit</a>
+                        </form>
                 </td>
             </tr>
         @endforeach

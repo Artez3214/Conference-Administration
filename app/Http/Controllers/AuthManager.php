@@ -24,12 +24,37 @@ class AuthManager extends Controller
         ]);
 
         $credentials = $request->only('email','password');
+
         if(Auth::attempt($credentials)){
             return redirect()->intended(route('conferences'));
         }
         return redirect(route('login'))->with("error", "login details are not valid");
     }
 
+    function registrationPost(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = Hash::make($request->password);
+        $user = User::create($data);
+        if(!$user){
+            return redirect(route('registration'))->with("error", "registration details are not valid");
+        }
+        return redirect(route('login'))->with("success", "Registration success");
+
+    }
+
+    function registration(){
+        if(Auth::check()){
+            return redirect(route('home'));
+        }
+        return view('registration');
+    }
 
     function logout(){
         Session::flush();
