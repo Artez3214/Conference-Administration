@@ -38,7 +38,9 @@
                 <td>
                     <form action="{{route('conferences.destroy',$conference->id)}}">
                         <a class="btn btn-info" href="{{route('conferences.show', $conference->id)}}">Show</a>
+                        @auth
                         <a class="btn btn-primary" href="{{ route('conferences.edit',$conference->id) }}">Edit</a>
+                        @endauth
                         </form>
                 </td>
             </tr>
