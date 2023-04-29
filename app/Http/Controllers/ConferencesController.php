@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 
-class ConfManager extends Controller
+class ConferencesController extends Controller
 {
 
     public function createConferences()

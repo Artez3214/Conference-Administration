@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 
-class AuthManager extends Controller
+class AuthenticatorController extends Controller
 {
     function login(){
         if(Auth::check()){

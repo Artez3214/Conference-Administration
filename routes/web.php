@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ConfManager;
+use App\Http\Controllers\ConferencesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\AuthenticatorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,18 +13,18 @@ use App\Http\Controllers\AuthManager;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/login', [AuthManager::class, 'login'])->name('login');
-Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
-Route::get('/logout',[AuthManager::class, 'logout'])->name('logout');
-Route::get('/',[ConfManager::class, 'index'])->name('conferences');
-Route::get('/show/{value}',[ConfManager::class, 'show'])->name('conferences.show');
-Route::get('/registration', [AuthManager::class, 'registration'])->name('registration');
-Route::post('/registration', [AuthManager::class, 'registrationPost'])->name('registration.post');
+Route::get('/login', [AuthenticatorController::class, 'login'])->name('login');
+Route::post('/login', [AuthenticatorController::class, 'loginPost'])->name('login.post');
+Route::get('/logout',[AuthenticatorController::class, 'logout'])->name('logout');
+Route::get('/',[ConferencesController::class, 'index'])->name('conferences');
+Route::get('/show/{value}',[ConferencesController::class, 'show'])->name('conferences.show');
+Route::get('/registration', [AuthenticatorController::class, 'registration'])->name('registration');
+Route::post('/registration', [AuthenticatorController::class, 'registrationPost'])->name('registration.post');
 Route::group(['middleware' =>'auth'], function(){
-    Route::get('/create',[ConfManager::class, 'createConferences'])->name('createConferences');
-    Route::post('/create',[ConfManager::class, 'postConferences'])->name('conferences.post');
-    Route::post('/destroy',[ConfManager::class, 'destroy'])->name('conferences.destroy');
-    Route::get('/edit/{value}',[ConfManager::class, 'edit'])->name('conferences.edit');
-    Route::put('/edit/{id}',[ConfManager::class, 'postEdit'])->name('edit.post');
+    Route::get('/create',[ConferencesController::class, 'createConferences'])->name('createConferences');
+    Route::post('/create',[ConferencesController::class, 'postConferences'])->name('conferences.post');
+    Route::post('/destroy',[ConferencesController::class, 'destroy'])->name('conferences.destroy');
+    Route::get('/edit/{value}',[ConferencesController::class, 'edit'])->name('conferences.edit');
+    Route::put('/edit/{id}',[ConferencesController::class, 'postEdit'])->name('edit.post');
 });
 
